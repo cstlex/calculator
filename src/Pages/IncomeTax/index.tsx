@@ -4,6 +4,7 @@ import 'Utils/Extensions/NumberUtils'
 import cn from 'classnames'
 import { PaymentTerms, AllPaymentTerms } from 'Utils/GlobalValues'
 import TermSelector from 'Components/TermSelector'
+import MoneyLabel from 'Components/MoneyLabel'
 
 export default function IncomeTax() {
     const [annualPayment, setAnnualPayment] = React.useState(85000)
@@ -44,59 +45,61 @@ export default function IncomeTax() {
                     />
                 </div>
             </div>
-            <span className="text-xl mt-6">
-                Base payment: ${basePayment.formatted}
-            </span>
-            <span className="text-xl mt-2">
-                Total Deductions: ${totalDeductions.formatted}
-            </span>
-            <div className="flex flex-col mx-10">
-                <span>Federal</span>
-                {federalTaxes.details.map((detail) => (
-                    <span
-                        className={cn(
-                            'ml-2',
-                            detail.amount < 0 && 'text-green-400',
-                        )}
-                        key={detail.name}
-                    >
-                        {detail.name}: ${detail.amount.formatted}
-                    </span>
-                ))}
-                <span className="ml-2 mt-1">
-                    Total: $
-                    {
-                        federalTaxes.details
-                            .map((detail) => detail.amount)
-                            .reduce((prev, next) => prev + next, 0).formatted
-                    }
+            <div className="flex flex-col w-full md:w-1/2">
+                <span className="text-xl mt-6 flex">
+                    Base payment: <MoneyLabel value={basePayment} />
                 </span>
-
-                <span>Provincial</span>
-                {provincialTaxes.details.map((detail) => (
-                    <span
-                        className={cn(
-                            'ml-2',
-                            detail.amount < 0 && 'text-green-400',
-                        )}
-                        key={detail.name}
-                    >
-                        {detail.name}: ${detail.amount.formatted}
+                <div className="flex flex-col mx-10">
+                    <span>Federal</span>
+                    {federalTaxes.details.map((detail) => (
+                        <span
+                            className={cn(
+                                'ml-2 flex',
+                                detail.amount < 0 && 'text-green-400',
+                            )}
+                            key={detail.name}
+                        >
+                            {detail.name}: <MoneyLabel value={detail.amount} />
+                        </span>
+                    ))}
+                    <span className="ml-2 mt-1 flex">
+                        Total:
+                        <MoneyLabel
+                            value={federalTaxes.details
+                                .map((detail) => detail.amount)
+                                .reduce((prev, next) => prev + next, 0)}
+                        />
                     </span>
-                ))}
-                <span className="ml-2 mt-1">
-                    Total: $
-                    {
-                        provincialTaxes.details
-                            .map((detail) => detail.amount)
-                            .reduce((prev, next) => prev + next, 0).formatted
-                    }
+
+                    <span>Provincial</span>
+                    {provincialTaxes.details.map((detail) => (
+                        <span
+                            className={cn(
+                                'ml-2 flex',
+                                detail.amount < 0 && 'text-green-400',
+                            )}
+                            key={detail.name}
+                        >
+                            {detail.name}: <MoneyLabel value={detail.amount} />
+                        </span>
+                    ))}
+                    <span className="ml-2 mt-1 flex">
+                        Total:{' '}
+                        <MoneyLabel
+                            value={provincialTaxes.details
+                                .map((detail) => detail.amount)
+                                .reduce((prev, next) => prev + next, 0)}
+                        />
+                    </span>
+                </div>
+                <span className="text-xl mt-2 flex">
+                    Total Deductions: <MoneyLabel value={totalDeductions} />
+                </span>
+                <span className="text-xl mt-2 flex">
+                    Total Take-home pay:{' '}
+                    <MoneyLabel value={basePayment - totalDeductions} />
                 </span>
             </div>
-            <span className="text-xl mt-2">
-                Total Take-home pay: $
-                {(basePayment - totalDeductions).formatted}
-            </span>
         </div>
     )
 }

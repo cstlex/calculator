@@ -24,6 +24,7 @@ export default function LoanRepayment() {
         (basePrice * termBasedInterestRate * common) / (common - 1)
 
     let principalsPaid = 0
+    let interestsPaid = 0
 
     return (
         <div className="flex flex-col">
@@ -61,7 +62,7 @@ export default function LoanRepayment() {
                     />
                 </div>
                 <div className="flex flex-col flex-1">
-                    <span className="text-xl">Interest Rate</span>
+                    <span className="text-xl">Interest Rate (%)</span>
                     <input
                         className="mt-2 bg-white dark:bg-black text-xl"
                         value={interest}
@@ -82,10 +83,13 @@ export default function LoanRepayment() {
             </span>
             <div className="text-xl text-end font-mono">
                 <div className="flex flex-row">
-                    <span className="flex-1">Num</span>
+                    <span className="flex-1 hidden md:block">Payment Num</span>
+                    <span className="flex-1 md:hidden">Num</span>
                     <span className="flex-1 hidden md:block">Payment</span>
-                    <span className="flex-1">Principal</span>
-                    <span className="flex-1">Interest</span>
+                    <span className="flex-1 hidden md:block">Principal</span>
+                    <span className="flex-1 md:hidden">Princ.</span>
+                    <span className="flex-1 hidden md:block">Interest</span>
+                    <span className="flex-1 md:hidden">Intr.</span>
                     <span className="flex-1 hidden md:block">
                         Principals Paid
                     </span>
@@ -101,6 +105,7 @@ export default function LoanRepayment() {
                         )
                     const principal = paymentPerTerm - interest
                     principalsPaid += principal
+                    interestsPaid += interest
                     return (
                         <div className="flex flex-row" key={num}>
                             <span className="flex-1">{num + 1}</span>
@@ -119,6 +124,22 @@ export default function LoanRepayment() {
                         </div>
                     )
                 })}
+                <div className="flex-row hidden md:flex">
+                    <span className="flex-1">Total Paid</span>
+                    <span className="flex-1">
+                        ${(paymentPerTerm * numberOfPayments).formatted}
+                    </span>
+                    <span className="flex-1">${basePrice.formatted}</span>
+                    <span className="flex-1">${interestsPaid.formatted}</span>
+                    <span className="flex-1">${basePrice.formatted}</span>
+                </div>
+                <div className="flex flex-col md:hidden mt-2">
+                    <span>
+                        Total Payment: $
+                        {(paymentPerTerm * numberOfPayments).formatted}
+                    </span>
+                    <span>Total Interests: ${interestsPaid.formatted}</span>
+                </div>
             </div>
         </div>
     )
