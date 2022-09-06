@@ -1,6 +1,7 @@
 declare global {
     interface Number {
         formatted: string
+        range: number[]
     }
 }
 
@@ -24,6 +25,19 @@ Object.defineProperty(Number.prototype, 'formatted', {
         } else {
             return value
         }
+    },
+})
+
+// eslint-disable-next-line no-extend-native
+Object.defineProperty(Number.prototype, 'range', {
+    get: function (): number[] {
+        const range: number[] = []
+
+        for (let i = 0; i < this; i++) {
+            range.push(i)
+        }
+
+        return range
     },
 })
 

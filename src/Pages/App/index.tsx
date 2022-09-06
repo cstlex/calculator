@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Menu from 'Components/Menu'
 import IncomeTax from 'Pages/IncomeTax'
+import LoanRepayment from 'Pages/LoanRepayment'
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
                 <div className="h-0 flex-grow overflow-scroll bg-accent-cardBackground-light dark:bg-accent-cardBackground-dark rounded-2xl px-2 py-2">
                     <Routes>
                         <Route path="/tax" element={<IncomeTax />} />
+                        <Route path="/loan" element={<LoanRepayment />} />
                         <Route
                             path="*"
                             element={<Navigate to="/tax" replace />}

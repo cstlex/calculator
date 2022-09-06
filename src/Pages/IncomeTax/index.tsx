@@ -2,26 +2,8 @@ import React from 'react'
 import { FederalTax, ProvincialTax } from 'Utils/TaxRules'
 import 'Utils/Extensions/NumberUtils'
 import cn from 'classnames'
-
-enum PaymentTerms {
-    monthly = 12,
-    twiceMonth = 24,
-    biWeekly = 26,
-    weekly = 52,
-}
-
-function termsRepresentation(term: PaymentTerms): string {
-    switch (term) {
-        case PaymentTerms.monthly:
-            return 'Monthly'
-        case PaymentTerms.twiceMonth:
-            return 'Twice a month'
-        case PaymentTerms.biWeekly:
-            return 'Bi-Weekly'
-        case PaymentTerms.weekly:
-            return 'Weekly'
-    }
-}
+import { PaymentTerms, AllPaymentTerms } from 'Utils/GlobalValues'
+import TermSelector from 'Components/TermSelector'
 
 export default function IncomeTax() {
     const [annualPayment, setAnnualPayment] = React.useState(85000)
@@ -37,9 +19,11 @@ export default function IncomeTax() {
         provincialTaxes.totalIncomeTax +
         provincialTaxes.totalDeducted
 
+    // TODO: - Add after CPP/EI max out value
+
     return (
         <div className="flex flex-col">
-            <div className="flex flex-row space-x-2">
+            <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Annual Income</span>
                     <input
@@ -52,24 +36,12 @@ export default function IncomeTax() {
                 </div>
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Payment Terms</span>
-                    <select
-                        className="mt-2 bg-white dark:bg-black"
+                    <TermSelector
+                        className="mt-2"
+                        terms={AllPaymentTerms}
                         value={terms}
-                        onChange={(e) => setTerms(parseInt(e.target.value))}
-                    >
-                        <option value={PaymentTerms.monthly}>
-                            {termsRepresentation(PaymentTerms.monthly)}
-                        </option>
-                        <option value={PaymentTerms.twiceMonth}>
-                            {termsRepresentation(PaymentTerms.twiceMonth)}
-                        </option>
-                        <option value={PaymentTerms.biWeekly}>
-                            {termsRepresentation(PaymentTerms.biWeekly)}
-                        </option>
-                        <option value={PaymentTerms.weekly}>
-                            {termsRepresentation(PaymentTerms.weekly)}
-                        </option>
-                    </select>
+                        onValueChange={setTerms}
+                    />
                 </div>
             </div>
             <span className="text-xl mt-6">
