@@ -4,14 +4,14 @@ export function interestAtPeriod(
     presentValue: number,
     paymentPerPeriod: number,
 ): number {
-    const fv =
+    return (
         futureValue(
             interestRatePerPeriod,
             currentPeriod - 1,
             -1 * paymentPerPeriod,
             presentValue,
         ) * interestRatePerPeriod
-    return fv
+    )
 }
 
 export function futureValue(
@@ -20,8 +20,6 @@ export function futureValue(
     paymentPerPeriod: number,
     presentValue: number,
 ): number {
-    const isRateZero = interestRatePerPeriod === 0
-
     if (interestRatePerPeriod === 0) {
         return -(presentValue + paymentPerPeriod * numberOfPeriods)
     }
