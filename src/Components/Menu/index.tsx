@@ -8,11 +8,11 @@ export default function Menu({
     return (
         <div
             className={cn(
-                'h-16 bg-black flex flex-row items-center px-5 print:hidden',
+                'h-16 bg-black flex flex-row items-center px-5 print:hidden text-white',
                 className,
             )}
         >
-            <span className="text-2xl text-white">Calculator</span>
+            <span className="text-2xl">Calculator</span>
             <Link className="ml-3" to="tax">
                 Income Tax
             </Link>

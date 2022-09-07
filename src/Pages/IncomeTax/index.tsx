@@ -25,11 +25,14 @@ export default function IncomeTax() {
 
     return (
         <div className="flex flex-col">
+            <span className="text-3xl font-bold hidden print:block mb-5">
+                Income tax calculator
+            </span>
             <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Annual Income</span>
                     <MoneyField
-                        className="mt-2 bg-white dark:bg-black text-xl h-8"
+                        className="mt-2 bg-white dark:bg-black text-xl h-8 rounded-xl"
                         value={annualPayment}
                         setValue={setAnnualPayment}
                     />

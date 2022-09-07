@@ -29,11 +29,14 @@ export default function LoanRepayment() {
 
     return (
         <div className="flex flex-col">
+            <span className="text-3xl font-bold hidden print:block mb-5">
+                Loan repayment calculator
+            </span>
             <div className="flex flex-col md:flex-row space-x-0 md:space-x-2 space-y-2 md:space-y-0">
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Base Price</span>
                     <MoneyField
-                        className="mt-2 bg-white dark:bg-black text-xl"
+                        className="mt-2 bg-white dark:bg-black text-xl rounded-xl"
                         value={basePrice}
                         setValue={setBasePrice}
                     />
@@ -41,7 +44,7 @@ export default function LoanRepayment() {
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Terms</span>
                     <input
-                        className="mt-2 p-2 bg-white dark:bg-black text-xl h-8"
+                        className="mt-2 p-2 bg-white dark:bg-black text-xl h-8 rounded-xl"
                         value={loanDuration}
                         onChange={(e) =>
                             setLoanDuration(parseInt(e.target.value))
@@ -53,7 +56,7 @@ export default function LoanRepayment() {
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Down Payment</span>
                     <input
-                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl"
+                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl rounded-xl"
                         value={downPayment}
                         onChange={(e) =>
                             setDownPayment(parseFloat(e.target.value))
@@ -63,7 +66,7 @@ export default function LoanRepayment() {
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Interest Rate (%)</span>
                     <input
-                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl"
+                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl rounded-xl"
                         value={interest}
                         onChange={(e) =>
                             setInterest(parseFloat(e.target.value))
