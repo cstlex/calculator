@@ -7,11 +7,12 @@ import {
 } from 'Utils/GlobalValues'
 import 'Utils/Extensions/NumberUtils'
 import { interestAtPeriod } from 'Utils/Interest'
+import MoneyField from 'Components/MoneyField'
 
 export default function LoanRepayment() {
     const [basePrice, setBasePrice] = React.useState(50000)
     const [loanDuration, setLoanDuration] = React.useState(60)
-    const [downPayment, setDownpayment] = React.useState(0)
+    const [downPayment, setDownPayment] = React.useState(0)
     const [interest, setInterest] = React.useState(2.99)
     const [paymentTerms, setPaymentTerms] = React.useState(PaymentTerms.monthly)
 
@@ -31,18 +32,16 @@ export default function LoanRepayment() {
             <div className="flex flex-col md:flex-row space-x-0 md:space-x-2 space-y-2 md:space-y-0">
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Base Price</span>
-                    <input
+                    <MoneyField
                         className="mt-2 bg-white dark:bg-black text-xl"
                         value={basePrice}
-                        onChange={(e) =>
-                            setBasePrice(parseFloat(e.target.value))
-                        }
+                        setValue={setBasePrice}
                     />
                 </div>
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Terms</span>
                     <input
-                        className="mt-2 bg-white dark:bg-black text-xl"
+                        className="mt-2 p-2 bg-white dark:bg-black text-xl h-8"
                         value={loanDuration}
                         onChange={(e) =>
                             setLoanDuration(parseInt(e.target.value))
@@ -54,17 +53,17 @@ export default function LoanRepayment() {
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Down Payment</span>
                     <input
-                        className="mt-2 bg-white dark:bg-black text-xl"
+                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl"
                         value={downPayment}
                         onChange={(e) =>
-                            setDownpayment(parseFloat(e.target.value))
+                            setDownPayment(parseFloat(e.target.value))
                         }
                     />
                 </div>
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Interest Rate (%)</span>
                     <input
-                        className="mt-2 bg-white dark:bg-black text-xl"
+                        className="mt-2 p-2 h-8 bg-white dark:bg-black text-xl"
                         value={interest}
                         onChange={(e) =>
                             setInterest(parseFloat(e.target.value))

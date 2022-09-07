@@ -5,6 +5,7 @@ import cn from 'classnames'
 import { PaymentTerms, AllPaymentTerms } from 'Utils/GlobalValues'
 import TermSelector from 'Components/TermSelector'
 import MoneyLabel from 'Components/MoneyLabel'
+import MoneyField from 'Components/MoneyField'
 
 export default function IncomeTax() {
     const [annualPayment, setAnnualPayment] = React.useState(85000)
@@ -27,12 +28,10 @@ export default function IncomeTax() {
             <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
                 <div className="flex flex-col flex-1">
                     <span className="text-xl">Annual Income</span>
-                    <input
-                        className="mt-2 bg-white dark:bg-black text-xl"
+                    <MoneyField
+                        className="mt-2 bg-white dark:bg-black text-xl h-8"
                         value={annualPayment}
-                        onChange={(e) =>
-                            setAnnualPayment(parseFloat(e.target.value))
-                        }
+                        setValue={setAnnualPayment}
                     />
                 </div>
                 <div className="flex flex-col flex-1">
@@ -49,7 +48,7 @@ export default function IncomeTax() {
                 <span className="text-xl mt-6 flex">
                     Base payment: <MoneyLabel value={basePayment} />
                 </span>
-                <div className="flex flex-col mx-10">
+                <div className="flex flex-col ml-10">
                     <span>Federal</span>
                     {federalTaxes.details.map((detail) => (
                         <span

@@ -16,7 +16,7 @@ export default function TermSelector({
 }: Props & React.HTMLAttributes<HTMLSelectElement>) {
     return (
         <select
-            className={cn('bg-white dark:bg-black', className)}
+            className={cn('bg-white dark:bg-black h-8', className)}
             value={value}
             onChange={(e) => onValueChange(parseInt(e.target.value))}
         >
