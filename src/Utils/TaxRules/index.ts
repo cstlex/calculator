@@ -202,15 +202,15 @@ export const FederalTax = new Tax(
         new TaxRule('33%', 33, 221709),
     ],
     [
-        new TaxRule('CPP', 5.7, undefined, undefined, 3500),
-        new TaxRule('EI', 1.58, undefined, undefined),
+        new TaxRule('CPP', 5.95, undefined, undefined, 3500),
+        new TaxRule('EI', 1.63, undefined, undefined),
     ],
     [],
     [
         new TaxRule('Tax Credit', 15, undefined, undefined, undefined, [
-            new FixedAmountRule('Basic Personal Amount', 14398),
-            new TaxRule('CPP', 5.7, undefined, 64900, 3500),
-            new TaxRule('EI', 1.58, undefined, 60300),
+            new FixedAmountRule('Basic Personal Amount', 15000),
+            new TaxRule('CPP', 5.95, undefined, 66600, 3500),
+            new TaxRule('EI', 1.63, undefined, 61500),
             new MinimumFixedAmountRule('Canada Employment Amount', 1287),
         ]),
     ],
